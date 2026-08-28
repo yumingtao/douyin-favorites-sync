@@ -1,0 +1,16 @@
+# Node
+node_modules/
+
+# main.js is tracked for manual installation (no GitHub Releases step)
+
+*.js.map
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo

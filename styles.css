@@ -1,0 +1,244 @@
+/* ═══════════════════════════════════════════════════
+   Douyin Obsidian Sync — Settings UI Styles
+   ═══════════════════════════════════════════════════ */
+
+/* ── Root container ── */
+.douyin-sync-settings {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 0 1rem 2rem;
+}
+
+/* ── Header ── */
+.douyin-sync-header {
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--background-modifier-border);
+}
+
+.douyin-sync-header h2 {
+  margin: 0 0 0.25rem;
+  padding: 0;
+  font-size: 1.5em;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.douyin-sync-header__desc {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: var(--font-ui-small);
+  line-height: 1.5;
+}
+
+/* ── Sections ── */
+.douyin-sync-section {
+  margin-bottom: 1.25rem;
+}
+
+.douyin-sync-section--actions {
+  margin-top: 2rem;
+}
+
+/* ── Card ── */
+.douyin-sync-card {
+  margin-bottom: 1.5rem;
+}
+
+.douyin-sync-card__title-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.6rem;
+}
+
+.douyin-sync-card__icon {
+  font-size: 1.1em;
+}
+
+.douyin-sync-card__title {
+  font-weight: 600;
+  font-size: 0.95em;
+  color: var(--text-normal);
+}
+
+/* ── Status indicator ── */
+.douyin-sync-status {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: 6px;
+  background: var(--background-primary);
+  transition: background 0.3s ease;
+}
+
+.douyin-sync-status__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+.douyin-sync-status--checking .douyin-sync-status__dot {
+  background: var(--text-faint);
+  animation: douyin-sync-pulse 1.2s ease-in-out infinite;
+}
+
+.douyin-sync-status--ok .douyin-sync-status__dot {
+  background: #4caf50;
+  box-shadow: 0 0 6px rgba(76, 175, 80, 0.5);
+}
+
+.douyin-sync-status--error .douyin-sync-status__dot {
+  background: #ef5350;
+  box-shadow: 0 0 6px rgba(239, 83, 80, 0.4);
+}
+
+.douyin-sync-status__text {
+  font-size: var(--font-ui-small);
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+.douyin-sync-status--ok .douyin-sync-status__text {
+  color: #4caf50;
+}
+
+.douyin-sync-status--error .douyin-sync-status__text {
+  color: #ef5350;
+}
+
+@keyframes douyin-sync-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.85); }
+}
+
+/* ── Setting items ── */
+.douyin-sync-section .setting-item {
+  padding: 1rem 1rem;
+  margin: 0 0 0.5rem;
+  border: none;
+  border-radius: 8px;
+  background: var(--background-secondary);
+}
+
+.douyin-sync-section .setting-item.setting-item-heading {
+  margin-bottom: 0.75rem;
+  padding: 0.25rem 0 0.5rem;
+  background: transparent;
+  border-radius: 0;
+  border: none;
+}
+
+.douyin-sync-section .setting-item-info {
+  padding-left: 0;
+  margin-left: 0;
+}
+
+.douyin-sync-section .setting-item-name {
+  padding-left: 0;
+  margin-left: 0;
+}
+
+.douyin-sync-setting .setting-item-info {
+  flex: 1;
+  min-width: 0;
+  padding-left: 0;
+  margin-left: 0;
+}
+
+.douyin-sync-setting .setting-item-name {
+  font-weight: 500;
+  font-size: 0.92em;
+  padding-left: 0;
+}
+
+.douyin-sync-setting .setting-item-description {
+  font-size: var(--font-smallest);
+  color: var(--text-faint);
+  line-height: 1.45;
+  margin-top: 4px;
+}
+
+.douyin-sync-setting .setting-item-control input[type="text"],
+.douyin-sync-setting .setting-item-control input[type="url"] {
+  min-width: 180px;
+}
+
+/* ── Buttons ── */
+.douyin-sync-settings .douyin-sync-btn--primary {
+  background: var(--interactive-accent);
+  color: var(--text-on-accent);
+  font-weight: 600;
+  border-radius: 6px;
+  padding: 6px 18px;
+  transition: opacity 0.2s ease, transform 0.1s ease;
+}
+
+.douyin-sync-settings .douyin-sync-btn--primary:hover {
+  opacity: 0.9;
+}
+
+.douyin-sync-settings .douyin-sync-btn--primary:active {
+  transform: scale(0.97);
+}
+
+.douyin-sync-btn--loading {
+  opacity: 0.7;
+  pointer-events: none;
+  position: relative;
+}
+
+.douyin-sync-btn--loading::after {
+  content: "";
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  margin-left: 8px;
+  border: 2px solid transparent;
+  border-top-color: currentColor;
+  border-radius: 50%;
+  animation: douyin-sync-spin 0.6s linear infinite;
+  vertical-align: middle;
+}
+
+@keyframes douyin-sync-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ── Dropdown styling ── */
+.douyin-sync-setting select {
+  min-width: 220px;
+}
+
+/* ── Dark mode tweaks ── */
+.theme-dark .douyin-sync-status--ok .douyin-sync-status__dot {
+  box-shadow: 0 0 8px rgba(76, 175, 80, 0.6);
+}
+
+.theme-dark .douyin-sync-status--error .douyin-sync-status__dot {
+  box-shadow: 0 0 8px rgba(239, 83, 80, 0.5);
+}
+
+/* ── Status bar ── */
+.douyin-sync-statusbar {
+  font-size: var(--font-ui-small);
+  color: var(--text-muted);
+  transition: color 0.3s ease;
+  cursor: pointer;
+}
+
+.douyin-sync-statusbar--ok {
+  color: #4caf50;
+}
+
+.douyin-sync-statusbar--error {
+  color: #ef5350;
+}
+
+/* ── Legacy status class (backward compat) ── */
+.douyin-sync-status {
+  font-size: var(--font-ui-small);
+}
