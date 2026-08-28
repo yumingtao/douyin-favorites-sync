@@ -1,0 +1,65 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "*"
+
+permissions:
+  contents: write
+  attestations: write
+  id-token: write
+
+jobs:
+  build-and-attest:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      - name: Collect release assets
+        run: |
+          mkdir -p release
+          cp main.js manifest.json styles.css release/
+
+      - name: Generate build provenance attestation
+        uses: actions/attest-build-provenance@v2
+        with:
+          subject-path: |
+            release/main.js
+            release/styles.css
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            release/main.js
+            release/styles.css
+            release/manifest.json
+          body: |
+            ## What's new
+
+            Obsidian plugin release ${{ github.ref_name }}
+
+            ### Assets
+            - `main.js` — Compiled plugin bundle
+            - `styles.css` — Plugin styles
+            - `manifest.json` — Plugin manifest
+
+            ### Verification
+            This release is attested with build provenance via
+            [GitHub Artifact Attestations](https://docs.github.com/en/security/attesters).
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
